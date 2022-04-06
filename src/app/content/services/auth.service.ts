@@ -21,14 +21,6 @@ import {UserService} from "./user.service";
 
 
 
-     //  this.currentUser = {
-     //    username: 'maria',
-     //    password:'1234',
-     //    firstname:'Maria',
-     //    lastname:'Ioana',
-     //    score:34
-     //  }
-
     }
 
   registerUser(userName: string, password:string,firstName:string,lastName:string){

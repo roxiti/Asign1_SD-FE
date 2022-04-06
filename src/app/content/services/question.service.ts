@@ -10,17 +10,13 @@ export class QuestionService {
   getQuestions():IQuestion[]
   {
 
-  //  let subject = new Subject<IQuestion[]>()
-   // setTimeout(() => {subject.next(QUESTIONS); subject.complete();},100)
-    //return subject;
+
     return QUESTIONS
   }
   getQuestionsOfUser(user: string):IQuestion[]
   {
 
-    //  let subject = new Subject<IQuestion[]>()
-    // setTimeout(() => {subject.next(QUESTIONS); subject.complete();},100)
-    //return subject;
+
     return QUESTIONS.filter(quest => quest.author.username == user )
   }
 
