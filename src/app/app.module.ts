@@ -3,7 +3,7 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { Page1Component } from './page1/page1.component';
+//import { Page1Component } from './page1/page1.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {MatToolbarModule} from "@angular/material/toolbar";
 import {MatSidenavModule} from '@angular/material/sidenav';
@@ -45,7 +45,6 @@ import { EditAnswerComponent } from './content/pages/edit-answer/edit-answer.com
 @NgModule({
   declarations: [
     AppComponent,
-    Page1Component,
     HomeComponent,
     LoginComponent,
     RegisterComponent,
