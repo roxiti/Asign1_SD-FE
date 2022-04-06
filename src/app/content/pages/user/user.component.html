@@ -1,0 +1,62 @@
+
+
+<div style="height:calc(110vh - 90px); display: flex; background-image: url('acs.jpg')">
+<!--<mat-grid-list cols="4" rowHeight="400px">-->
+<!--  <mat-grid-tile-->
+<!--    *ngFor="let tile of tiles"-->
+<!--    [colspan]="tile.cols"-->
+<!--    [rowspan]="tile.rows"-->
+<!--    [style.background]="tile.color" >-->
+<!--    {{tile.text}}-->
+
+<!--  </mat-grid-tile>-->
+<!--</mat-grid-list>-->
+
+  <div>
+    <p style="visibility: hidden"> Hello </p>
+  </div>
+  <mat-card class="example-card" style="width: 300px; flex: 0.2 0.2 auto; height: 400px; margin-top: 2em">
+    <mat-card-header>
+
+      <div mat-card-avatar class="example-header-image" ></div>
+      <mat-card-title>{{auth?.currentUser?.lastname}} {{auth?.currentUser?.firstname}}</mat-card-title>
+      <mat-card-subtitle>{{auth?.currentUser?.username}}</mat-card-subtitle>
+    </mat-card-header>
+    <mat-card-content>
+      <p>
+        {{user.description}}
+      </p>
+    </mat-card-content>
+    <h3>Score: {{auth?.currentUser?.score}} </h3>
+    <mat-card-actions>
+      <button mat-raised-button [routerLink]="['profile']" color="primary"> Edit Profile</button>
+
+      <button mat-raised-button [routerLink]="['question/create']" color="primary" style="margin-top:1em"> Create Question</button>
+
+
+      <br>
+
+
+    </mat-card-actions>
+  </mat-card>
+
+  <mat-card class="example-card" style="width: 300px; margin-left: 10em; margin-right: 3em; flex: 1 1 auto; height: 80vh; margin-top: 2em">
+    <div>
+  <h1>My Questions</h1>
+  <app-question-thumbnail *ngFor="let question of questions" [question]="question"></app-question-thumbnail>
+    </div>
+
+
+
+  </mat-card>
+
+  <mat-card class="example-card" style="width: 300px; margin-left: 10em; margin-right: 3em; flex: 1 1 auto; height: 80vh; margin-top: 2em">
+
+  <div>
+    <h1>My Answers</h1>
+    <app-answer-thumbnail *ngFor="let answer of answers" [answer]="answer" ></app-answer-thumbnail>
+  </div>
+
+  </mat-card>
+
+</div>

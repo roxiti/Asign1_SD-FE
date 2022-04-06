@@ -1,0 +1,52 @@
+<!--
+-->
+
+<body>
+<div>
+  <p style="visibility: hidden"> Hello </p>
+</div>
+<mat-card  style="text-align: center; margin-left: 20px; margin-right: 20px; margin-top: 20px; background-color:#fafafa;  ">
+  <mat-card-title >Edit your Profile</mat-card-title>
+<div>
+  <hr>
+  <div class="col-md-4" >
+    <form autocomplete="off" novalidate [formGroup]="profileForm" (ngSubmit)="saveProfile(profileForm.value)">
+      <div class="form-group" style="margin-top: 2em" [ngClass]="{'error': !validateFirstName()}" >
+
+        <em *ngIf="!validateFirstName() && profileForm.controls.firstName.errors" >Only letter are accepted</em>
+        <br>
+        <label for="firstName">First Name:</label>
+
+
+        <input formControlName="firstName" id="firstName" type="text" class="form-control"
+               placeholder="First Name..."/>
+        <em *ngIf="!validateFirstName()" >Required</em>
+
+        </div>
+
+      <em *ngIf="!validateLastName() && profileForm.controls.lastName.errors" >Only letter are accepted</em>
+      <br>
+      <div class="form-group" style="margin-top: 1em" [ngClass]="{'error': !validateLastName()}">
+        <label for="lastName">Last Name:</label>
+
+        <input formControlName="lastName" id="lastName" type="text" class="form-control"
+               placeholder="Last Name..."/>
+        <em *ngIf="!validateLastName()">Required</em>
+      </div>
+
+
+
+      <div style="margin-top: 1em">
+      <button mat-raised-button type="submit" class="btn btn-primary" style="margin-left: 3em;">Save</button>
+      <button mat-raised-button type="buttton" class="btn btn-primary" style="margin-left: 2em;" (click)="cancel()">Cancel</button>
+      </div>
+    </form>
+
+
+  </div>
+
+
+</div>
+
+</mat-card>
+</body>

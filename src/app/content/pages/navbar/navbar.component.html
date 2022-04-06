@@ -1,0 +1,54 @@
+<div style="height:70px">
+
+  <mat-toolbar color="primary">
+    <mat-icon  aria-hidden="false" aria-label="Example home icon" style="margin-right: 1.0em" [routerLink]="['/home']">home</mat-icon>
+    <h1 style="margin-right: 5em"> StackOverflow </h1>
+
+    <!--    <mat-form-field class="example-form" appearance="fill">-->
+    <!--      <mat-label>Search</mat-label>-->
+    <!--      <input type="search">-->
+    <!--    </mat-form-field>-->
+
+    <!--    <label for="site-search" style="font-size: 15px; margin-right: 20px"></label>-->
+
+
+    <!-- <p-tabMenu  color ="primary" [model]="items"></p-tabMenu>-->
+    <!--<button mat-button [matMenuTriggerFor]="menu">Menu</button>
+    <mat-menu #menu="matMenu">
+      <button mat-menu-item >Question</button>
+      <button mat-menu-item >Login</button>
+      <button mat-menu-item >Sign up</button>
+    </mat-menu>-->
+<!--    <span class="example-spacer"></span>-->
+
+    <div class="example-button-row1">
+      <div style="visibility: hidden">
+      <input type="search" id="site-search" name="q" style="padding-right: 70px; margin-right: 10px"  >
+      <button mat-raised-button>Search</button>
+      </div>
+
+      <div>
+      <button mat-button  > <a  [routerLink]="['/questions']">Questions</a></button>
+      <button mat-button > <a *ngIf="!auth.isAuthenticated()" [routerLink]="['/login']">Login</a></button>
+        <a *ngIf="auth.isAuthenticated()" [routerLink]="['/user',auth?.currentUser?.username]">Hello {{auth?.currentUser?.firstname}} </a>
+      <button mat-button > <a *ngIf="!auth.isAuthenticated()"  [routerLink]="['/register']">Sign up</a> </button>
+      </div>
+
+    </div>
+    <!--<mat-tab-group >
+
+
+
+      <mat-tab label="Questions"> </mat-tab>
+      <mat-tab label="Login"> </mat-tab>
+      <mat-tab label="Sign up" >  </mat-tab>
+    </mat-tab-group>-->
+
+
+
+
+
+  </mat-toolbar>
+
+
+</div>

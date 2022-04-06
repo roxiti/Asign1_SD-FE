@@ -1,0 +1,23 @@
+.example-box
+{
+  display: flex;
+  background-color:white;
+  color:#3f4ee1;
+}
+body {
+  background-image: url('bgv.png');
+  height: 95vh;
+}
+
+
+.error input {background-color: #fcc2c2;}
+.error ::-webkit-input-placeholder{color:#fcc2c2;}
+.error ::-moz-placeholder{ color:#fcc2c2;}
+
+em {
+  margin-left: 1em;
+  color:red;
+}
+label{
+  margin-right: 1em;
+}

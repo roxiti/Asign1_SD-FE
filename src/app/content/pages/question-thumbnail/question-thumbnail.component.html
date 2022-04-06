@@ -1,0 +1,26 @@
+<body>
+<div [routerLink]="['/questions',question.id]"    style="display: block; background-color: #c8c8fb; height: 330px">
+  <h1 class="heading" style="font-style: italic;">{{question?.title}}</h1>
+
+
+  <div class="textq"> {{question?.qst_text}}</div>
+  <div >
+    <p class="p1">Creation date: {{question?.creation_date | date: 'short'}}</p>
+  <p class="p1">Score: {{question?.score_qst}}</p>
+
+  <p class="p2">Author: {{question?.author?.username}}</p></div>
+  <div style="margin-left: 1em; color:white">
+  <mat-chip-list
+    class="example-chip"
+    cdkDropList
+    cdkDropListOrientation="horizontal">
+  <mat-chip class="example-box" *ngFor="let tag of question?.tags" [textContent]="tag.name" ></mat-chip>
+  </mat-chip-list>
+  </div>
+
+
+  <p class="p2"></p>
+
+</div>
+
+</body>

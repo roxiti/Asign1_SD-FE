@@ -1,0 +1,43 @@
+<body>
+<div>
+  <p style="visibility: hidden"> Hello </p>
+</div>
+<div style ="margin-top: 2em">
+  <mat-card  style="text-align: center; margin-left: 20px; margin-right: 20px; ">
+    <mat-card-title >Ask a question </mat-card-title>
+
+<hr>
+<div class="col-md-6" style="margin-top: 2em">
+  <form #newEventForm="ngForm" (ngSubmit)="saveQuestion(newEventForm.value)" autocomplete="off" novalidate>
+    <div class="form-group" [ngClass]="{'error': newEventForm.controls.name?.invalid && newEventForm.controls.name?.touched}"  >
+      <label for="questionTitle">Question Title:</label>
+      <br>
+      <em *ngIf="newEventForm.controls.name?.invalid && (newEventForm.controls.name?.touched)">Required</em>
+      <input (ngModel)="newQuestion.title" name="title" required id="questionTitle" type="text" class="form-control" placeholder="Title of your question..." style="margin-bottom: 2em"/>
+    </div>
+
+
+    <div class="form-group"  [ngClass]="{'error': newEventForm.controls.qst_text?.invalid && newEventForm.controls.qst_text?.touched}">
+      <label for="questionText">Question text:</label>
+      <br>
+      <em *ngIf="newEventForm.controls.qst_text?.invalid && (newEventForm.controls.qst_text?.touched)">Required</em>
+      <input class="example-full-width" (ngModel)="newQuestion.qst_text" name="qst_text" required id="questionText" type="text" class="form-control" placeholder="Text..." style="margin-bottom: 2em; height: 300px; width: 700px" />
+    </div>
+
+    <div class="form-group"  [ngClass]="{'error': newEventForm.controls.qst_text?.invalid && newEventForm.controls.qst_text?.touched}">
+      <label for="questionTags">Tags: (separate them with commas)</label>
+      <br>
+      <em *ngIf="newEventForm.controls.tags?.invalid && (newEventForm.controls.tags?.touched)">Required</em>
+      <input class="example-full-width" (ngModel)="newQuestion.tags" name="tags" required id="questionTags" type="text" class="form-control" placeholder="Tags..." style="margin-bottom: 2em" />
+    </div>
+
+    <br>
+
+    <button mat-raised-button type="submit" class="btn btn-primary" [disabled]="newEventForm.invalid"class="btn btn-primary" color="primary">Save</button>
+    <button mat-raised-button type="button" [disabled]="newEventForm.invalid" class="btn btn-default" (click)="cancel()" class="btn btn-default" style="margin-left: 2em;"  color="primary">Cancel</button>
+  </form>
+</div>
+
+  </mat-card>
+</div>
+</body>

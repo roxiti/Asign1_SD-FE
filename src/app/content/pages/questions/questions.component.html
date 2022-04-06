@@ -1,0 +1,8 @@
+
+<body>
+
+<div  >
+  <app-question-thumbnail *ngFor="let question of questions" [question]="question" (eventClick)="handleEventClicked($event)"></app-question-thumbnail>
+</div>
+
+</body>

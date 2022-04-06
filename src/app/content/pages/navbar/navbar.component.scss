@@ -1,0 +1,36 @@
+.style1
+{
+  padding-top: 1em;
+  padding-left: 0.9em;
+}
+
+.example-spacer {
+  flex: 1 1 auto;
+}
+
+
+:host ::ng-deep .mat-tab-label-active {
+  border-width: 9px;
+
+  //border-style: round(2px);
+  border-color: aliceblue;
+  text-decoration: none;
+  color: #efeffe;
+
+}
+:host ::ng-deep .mat-tab-group{
+  content-visibility: visible;
+
+}
+a {
+  text-decoration: none;
+  color: white;
+  text-align: right;
+}
+.example-button-row1{
+
+  justify-content: space-between;
+  text-align:right;
+  display:flex;
+  flex: auto;
+}

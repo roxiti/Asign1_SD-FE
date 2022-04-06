@@ -1,0 +1,23 @@
+<body>
+
+  <!--<h1 class="heading" style="font-style: italic;">{{answer.}}</h1>-->
+<div style="background-color: #3f4ee1; display: block; height: 300px" >
+  <div class="texta"> {{answer.ans_text}}</div>
+  <div >
+
+    <span class="example-spacer"></span>
+
+  <p class="p1">Creation date: {{answer.creation_date |  date: 'short' }}</p>
+    <p class="p1">Author: {{answer.author.username}} </p>
+  </div>
+
+  <p class="p2"><button class="btn btn-primary"  [disabled]="!auth.isAuthenticated() || checkAuthor()" mat-fab color="white" id="like" (click)="handleClickMe()"> Like </button>
+    <button class="btn btn-primary"  [disabled]="!auth.isAuthenticated() || checkAuthor()" mat-fab color="white" style="margin-left: 0.5em; margin-right: 0.5em;" id="dislike" (click)="handleClickMe()"> Dislike </button>
+
+</div>
+
+
+
+
+
+</body>
