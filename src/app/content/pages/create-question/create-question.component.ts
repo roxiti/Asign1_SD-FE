@@ -24,8 +24,8 @@ export class CreateQuestionComponent implements OnInit {
 
   saveQuestion(formValues:any)
   {
-
-    this.questionService.createQuestion(formValues,this.auth.currentUser)
+    console.log(this.auth.getUser())
+    return this.questionService.createQuestion(formValues,this.auth.getUser())
     //console.log()
    // this.questionService.parseTags(formValues.tags)
 

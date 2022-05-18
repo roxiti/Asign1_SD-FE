@@ -1,8 +1,16 @@
 
 <body>
+<div style="
+ margin: 0 auto; margin-left: 40%">
+  <label for="title_S">Search question by title:   </label>  <label for="tags_S" style="margin-left: 4em">Search question by filter tag:</label>
+  <br>
+  <input name="title_s" required id="title_S" type="text"  placeholder="Search by title" style="margin-bottom: 2em" [(ngModel)]="title_S"/>
+  <input name="tags_S" required id="tags_S" type="text"  placeholder="Search by tag" style="margin-bottom: 2em; margin-left: 6em" [(ngModel)]="tag_S"/>
+</div>
+</body>
 
-<div  >
-  <app-question-thumbnail *ngFor="let question of questions" [question]="question" (eventClick)="handleEventClicked($event)"></app-question-thumbnail>
+<div >
+  <app-question-thumbnail *ngFor="let question of questions | filterTitle:this.title_S | filterTag:this.tag_S" [question]="question" (eventClick)="handleEventClicked($event)"></app-question-thumbnail>
 </div>
 
-</body>
+

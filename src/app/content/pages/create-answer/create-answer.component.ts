@@ -14,10 +14,12 @@ import {IQuestion} from "../../models/question.model";
 export class CreateAnswerComponent implements OnInit {
 
   newAnswer!:IAnswer
-  question!:IQuestion
+  question:any
   constructor(private router:Router, private questionService: QuestionService,private auth: AuthService,private route: ActivatedRoute) { }
 
   ngOnInit(): void {
+
+    this.questionService.getOneQuestion2(+this.route.snapshot.params['id']).then(res => this.question = res)
   }
 
   saveAnswer(formValues:any)
@@ -25,9 +27,11 @@ export class CreateAnswerComponent implements OnInit {
 
 
 
-    this.question = this.questionService.getOneQuestion(+this.route.snapshot.params['id'])
-    this.questionService.createAnswer(formValues,this.auth.currentUser,this.question.id)
-    this.router.navigate(['questions/',this.question.id])
+
+   // console.log(this.question)
+
+    this.questionService.createAnswer(formValues,this.auth.getUser(),this.question?.id_qst)
+    this.router.navigate(['questions/',this.question?.id_qst])
 
 
   }

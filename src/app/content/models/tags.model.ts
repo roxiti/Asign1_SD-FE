@@ -1,5 +1,5 @@
 export interface ITags
 {
-  name:string
+  tag_name:string
 
 }

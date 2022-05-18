@@ -12,6 +12,8 @@ import {ProfileComponent} from "./content/pages/profile/profile.component";
 import {CreateQuestionComponent} from "./content/pages/create-question/create-question.component";
 import {CreateAnswerComponent} from "./content/pages/create-answer/create-answer.component";
 import {EditQuestionComponent} from "./content/pages/edit-question/edit-question.component";
+import {EditAnswerComponent} from "./content/pages/edit-answer/edit-answer.component";
+import {AdminComponent} from "./content/pages/admin/admin.component";
 //import { Page1Component } from '..app/page1/Page1Component';
 
 
@@ -22,12 +24,14 @@ const routes: Routes = [
   { path: 'home', component: HomeComponent },
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
+  { path : 'user/admin', component: AdminComponent },
   { path: 'user/:username', component: UserComponent },
   { path: 'questions', component: QuestionsComponent },
   { path: 'questions/:id', component: QuestionDetailsComponent },
   { path: 'user/:username/question/create', component: CreateQuestionComponent },
-  { path: 'question/edit/:id', component: EditQuestionComponent },
-  { path: 'question/answer/:id', component: CreateAnswerComponent },
+  { path: 'question/:username/edit/:id', component: EditQuestionComponent },
+  { path: 'question/:username/answer/:id', component: CreateAnswerComponent },
+  { path: 'question/:username/answer/:id/edit', component: EditAnswerComponent },
   { path: 'user/:username/profile', component: ProfileComponent },
   {path:'',component:HomeComponent}
 

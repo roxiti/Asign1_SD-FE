@@ -41,6 +41,11 @@ import { CreateQuestionComponent } from './content/pages/create-question/create-
 import { CreateAnswerComponent } from './content/pages/create-answer/create-answer.component';
 import { EditQuestionComponent } from './content/pages/edit-question/edit-question.component';
 import { EditAnswerComponent } from './content/pages/edit-answer/edit-answer.component';
+import {HttpClientModule } from "@angular/common/http";
+import {FilterTitlePipe} from "./content/modules/filterTitle";
+import {FilterTagPipe} from "./content/modules/filterTag";
+import { AdminComponent } from './content/pages/admin/admin.component';
+import { UseThumbnailComponent } from './content/pages/use-thumbnail/use-thumbnail.component';
 
 @NgModule({
   declarations: [
@@ -58,7 +63,12 @@ import { EditAnswerComponent } from './content/pages/edit-answer/edit-answer.com
     CreateQuestionComponent,
     CreateAnswerComponent,
     EditQuestionComponent,
-    EditAnswerComponent
+    EditAnswerComponent,
+    FilterTitlePipe,
+    FilterTagPipe,
+    AdminComponent,
+    UseThumbnailComponent
+
   ],
     imports: [
         BrowserModule,
@@ -78,7 +88,9 @@ import { EditAnswerComponent } from './content/pages/edit-answer/edit-answer.com
         MatTableModule,
         MatChipsModule,
         FormsModule,
-      ReactiveFormsModule
+      ReactiveFormsModule,
+      HttpClientModule,
+
 
 
     ],

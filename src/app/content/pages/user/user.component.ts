@@ -18,17 +18,20 @@ import {IAnswer} from "../../models/answer.model";
 export class UserComponent implements OnInit {
 
   user: any
-  questions!: IQuestion[]
+  questions!: any
   answers!: IAnswer[]
   constructor(private userService: UserService, private route: ActivatedRoute, public auth:AuthService, private questionService: QuestionService) { }
 
   ngOnInit(): void {
 
-    this.user = this.userService.getUser(this.route.snapshot.params['username'])
+    this.user = this.auth.getOneUser(this.route.snapshot.params['username'])
+    //console.log(this.user)
 
-    this.questions = this.questionService.getQuestionsOfUser(this.user.username)
+     this.questionService.getQuestionsOfUser(this.auth.getUser()).then(res => this.questions = res)
+    //console.log(this.questions)
 
-    this.answers = this.questionService.searchAnswers(this.auth.currentUser?.username)
+    console.log(this.auth?.currentUser?.username)
+    this.questionService.getAnswersOfUser(this.auth.getUser()).then(res => this.answers = res)
 
   }
 

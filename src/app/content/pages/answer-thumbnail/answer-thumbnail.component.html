@@ -1,18 +1,29 @@
 <body>
 
   <!--<h1 class="heading" style="font-style: italic;">{{answer.}}</h1>-->
-<div style="background-color: #3f4ee1; display: block; height: 300px" >
+<div style="background-color: #3f4ee1; display: block; height: 480px" >
   <div class="texta"> {{answer.ans_text}}</div>
+  <p class="p12">Score answer: {{answer.score_ans}} </p>
+
+  <div > {{answer.id}}</div>
   <div >
 
     <span class="example-spacer"></span>
 
-  <p class="p1">Creation date: {{answer.creation_date |  date: 'short' }}</p>
+  <p class="p1">Creation date: {{answer.creation_date  }}</p>
     <p class="p1">Author: {{answer.author.username}} </p>
+    <p class="p1">Score user: {{answer.author.score}}</p>
   </div>
 
-  <p class="p2"><button class="btn btn-primary"  [disabled]="!auth.isAuthenticated() || checkAuthor()" mat-fab color="white" id="like" (click)="handleClickMe()"> Like </button>
-    <button class="btn btn-primary"  [disabled]="!auth.isAuthenticated() || checkAuthor()" mat-fab color="white" style="margin-left: 0.5em; margin-right: 0.5em;" id="dislike" (click)="handleClickMe()"> Dislike </button>
+  <button mat-raised-button *ngIf="(auth.isAuthenticated() && checkAuthor())|| auth.isAdmin()" [routerLink]="['/question/'+ this.auth?.getUser() + '/answer/'+answer?.id_answ +'/edit/']" color="white" style="margin-top:-10em" id="answer"> Edit answer </button>
+  <button mat-raised-button *ngIf="(auth.isAuthenticated() && checkAuthor()) || auth.isAdmin()"  color="white" style="margin-top:1em; margin-left: 1em" (click)="deleteButton()"> Delete Answer</button>
+  <br>
+
+
+  <p class="p2"><button class="btn btn-primary"  [disabled]="!auth.isAuthenticated() || checkAuthor()" mat-fab color="white" id="like" (click)="handleClickLike()"> Like </button>
+    <button class="btn btn-primary"  [disabled]="!auth.isAuthenticated() || checkAuthor()" mat-fab color="white" style="margin-left: 0.5em; margin-right: 0.5em;" id="dislike" (click)="handleClickDislike()"> Dislike </button>
+<p></p>
+
 
 </div>
 

@@ -13,8 +13,8 @@ import {QuestionService} from "../../services/question.service";
 export class EditAnswerComponent implements OnInit {
 
 
-  private answerText!: FormControl
-  private answer!: IAnswer
+  private ans_text!: FormControl
+  private answer!: any
   private question!: IQuestion
   profileForm!: FormGroup
 
@@ -23,37 +23,32 @@ export class EditAnswerComponent implements OnInit {
   constructor(private router: ActivatedRoute, private route:Router, private questionService: QuestionService) { }
 
   ngOnInit(): void {
-    //this.answer = this.questionService.getOneQuestion(+this.router.snapshot.params['id'])
-    this.question = this.questionService.getOneQuestion(+this.router.snapshot.params['id'])
 
-    //this.answer = this.questionService.getOneAnswer(this.question.id,this.answer.id,)
 
-    this.answerText = new FormControl(this.questionService.getOneQuestion(this.question.id).answers,Validators.required)
+    this.questionService.getOneAnswer(+this.router.snapshot.params['id']).then(res => {
+      this.answer = res;
+      this.ans_text = new FormControl(this.answer.ans_text,Validators.required);
 
-    this.profileForm = new FormGroup({
 
-      answerText: this.answerText
+      this.profileForm = new FormGroup({
+        ans_text: this.ans_text,
+
+      });
+
     })
+
+
+
+
   }
 
 
-  // saveNewAnswer(formValues: any) {
-  //   if (this.profileForm.valid) {
-  //     console.log(formValues.answers)
-  //
-  //     this.answer = this.questionService.getOneAnswer(this.question.id,this.answer.id,)
-  //
-  //
-  //   //  this.questionService.updateCurrentQuestion(formValues.questionTitle, formValues.questionText, formValues.questionTags, this.question.id)
-  //     this.route.navigate(['questions'])
-  //   }
-  //
-  // }
+
 
   validateText()
   {
 
-    return this.answerText.valid || this.answerText.untouched
+    return this.ans_text.valid || this.ans_text.untouched
 
   }
 
@@ -61,6 +56,21 @@ export class EditAnswerComponent implements OnInit {
   cancel()
   {
     return this.route.navigate(['home']);
+  }
+
+  saveNewAnsw(formValues: any){
+
+    if (this.profileForm.valid) {
+      console.log(formValues)
+
+
+    //  this.questionService.updateCurrentQuestion(formValues,this.auth.currentUser ,this.question?.id_qst)
+     // this.route.navigate(['questions'])
+
+      this.questionService.updateCurrentAnswer(formValues,+this.router.snapshot.params['id']).then(res => this.answer = res)
+
+    }
+
   }
 
 }

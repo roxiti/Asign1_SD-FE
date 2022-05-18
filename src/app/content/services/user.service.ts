@@ -1,10 +1,18 @@
 import { Injectable } from '@angular/core'
+import {HttpClient} from "@angular/common/http";
 
 @Injectable()
 export class UserService {
-  getUsers()
+
+  constructor(private http: HttpClient) {
+  }
+
+  async getUsers()
   {
-    return USERS;
+    let users = await this.http.get("http://localhost:8080/users/getUsers").toPromise()
+
+    return users
+
   }
 
   getUser(username:string)
@@ -22,6 +30,7 @@ const USERS = [
   {
 
       username: 'maria',
+      email: 'maria@123',
       password:'1234',
       firstname:'Maria',
       lastname:'Ioana',
@@ -31,6 +40,7 @@ const USERS = [
   },
   {
     username: 'mihai22',
+    email: 'mihia@123',
     password:'parola12',
     firstname:'Mihai',
     lastname:'Eminescu',

@@ -15,10 +15,10 @@
 
         <em *ngIf="!validateFirstName() && profileForm.controls.firstName.errors" >Only letter are accepted</em>
         <br>
-        <label for="firstName">First Name:</label>
+        <label for="firstname">First Name:</label>
 
 
-        <input formControlName="firstName" id="firstName" type="text" class="form-control"
+        <input formControlName="firstname" id="firstname" type="text" class="form-control"
                placeholder="First Name..."/>
         <em *ngIf="!validateFirstName()" >Required</em>
 
@@ -27,12 +27,23 @@
       <em *ngIf="!validateLastName() && profileForm.controls.lastName.errors" >Only letter are accepted</em>
       <br>
       <div class="form-group" style="margin-top: 1em" [ngClass]="{'error': !validateLastName()}">
-        <label for="lastName">Last Name:</label>
+        <label for="lastname">Last Name:</label>
 
-        <input formControlName="lastName" id="lastName" type="text" class="form-control"
+        <input formControlName="lastname" id="lastname" type="text" class="form-control"
                placeholder="Last Name..."/>
         <em *ngIf="!validateLastName()">Required</em>
       </div>
+
+      <em *ngIf="!validateEmail() && profileForm.controls.email.errors" >Only letter are accepted</em>
+      <br>
+      <div class="form-group" style="margin-top: 1em" [ngClass]="{'error': !validateLastName()}">
+        <label for="email">Last Name:</label>
+
+        <input formControlName="email" id="email" type="text" class="form-control"
+               placeholder="Last Name..."/>
+        <em *ngIf="!validateEmail()">Required</em>
+      </div>
+
 
 
 

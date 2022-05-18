@@ -29,9 +29,11 @@
 
       <div>
       <button mat-button  > <a  [routerLink]="['/questions']">Questions</a></button>
-      <button mat-button > <a *ngIf="!auth.isAuthenticated()" [routerLink]="['/login']">Login</a></button>
-        <a *ngIf="auth.isAuthenticated()" [routerLink]="['/user',auth?.currentUser?.username]">Hello {{auth?.currentUser?.firstname}} </a>
-      <button mat-button > <a *ngIf="!auth.isAuthenticated()"  [routerLink]="['/register']">Sign up</a> </button>
+      <button mat-button > <a *ngIf="!auth.isAuthenticated() && !auth.isAdmin()" [routerLink]="['/login']">Login</a></button>
+        <a *ngIf="auth.isAuthenticated()" [routerLink]="['/user',auth?.getUser()]">Hello {{auth.getFirstname()}} </a>
+        <a   *ngIf="auth.isAdmin()" [routerLink]="['/user/admin']">Admin {{auth.getFirstname()}} </a>
+      <button mat-button > <a *ngIf="!auth.isAuthenticated() && !auth.isAdmin()"  [routerLink]="['/register']">Sign up</a> </button>
+      <button mat-button > <a *ngIf="auth.isAuthenticated() || auth.isAdmin()"  [routerLink]="['home']" (click)="Logout()">Logout</a> </button>
       </div>
 
     </div>

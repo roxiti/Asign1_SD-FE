@@ -14,10 +14,10 @@
     <div class="col-md-4">
       <form autocomplete="off" #loginForm="ngForm" (ngSubmit)="login(loginForm.value)"  novalidate>
         <div class="form-group" style="margin-top: 4em">
-          <label for="userName">User Name:</label>
+          <label for="username">User Name:</label>
 
-          <input (ngModel)="userName" required name="userName" id="userName" type="text" class="form-control" placeholder="User Name..." style="margin-left: 2em; margin-bottom: 2em"/>
-          <em style="color:red"; *ngIf="loginForm.controls.userName?.invalid && (loginForm.controls.userName?.touched || mouseoverLogin )">Required</em>
+          <input (ngModel)="username" required name="username" id="username" type="text" class="form-control" placeholder="User Name..." style="margin-left: 2em; margin-bottom: 2em"/>
+          <em style="color:red"; *ngIf="loginForm.controls.username?.invalid && (loginForm.controls.username?.touched || mouseoverLogin )">Required</em>
         </div>
         <div class="form-group" >
           <label for="password">Password:</label>

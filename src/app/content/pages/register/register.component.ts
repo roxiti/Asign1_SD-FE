@@ -11,10 +11,11 @@ export class RegisterComponent implements OnInit {
 
   constructor(private authService: AuthService,private route: Router) { }
 
-  userName!:string
+  username!:string
   password!:string
-  lastName!:string
-  firstName!:string
+  email!:string
+  lastname!:string
+  firstname!:string
   mouseoverLRegister:any
 
   ngOnInit( ): void {
@@ -26,8 +27,7 @@ export class RegisterComponent implements OnInit {
   register(formValues:any )
   {
 
-    this.authService.registerUser(formValues.userName
-      ,formValues.password,formValues.firstName, formValues.lastName)
+    this.authService.registerUser(formValues)
 
     this.route.navigate(['home'])
 

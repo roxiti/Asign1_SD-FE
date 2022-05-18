@@ -6,14 +6,14 @@ import {IAnswer} from "./answer.model";
 
 export interface IQuestion
 {
-  id:number,
+  id_qst:number,
   title:string,
   qst_text:string,
   creation_date:Date,
   score_qst:number,
   author: IUser,
-  tags?: ITags[],
-  answers:IAnswer[]
+  listOfTags?: ITags[],
+  listOfAnswers:IAnswer[]
 
 
 

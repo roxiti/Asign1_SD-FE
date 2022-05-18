@@ -22,7 +22,7 @@ export class QuestionThumbnailComponent implements OnInit {
 
   handleClickMe(){
     // @ts-ignore
-    this.eventClick.emit((this.question?.score_qst ) + 1)
+
   }
 
 

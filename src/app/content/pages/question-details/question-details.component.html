@@ -1,8 +1,8 @@
 <body>
-<div  style="display: block; background-color: #c8c8fb; height: 400px; margin-bottom: 5em">
+<div  style="display: block; background-color: #c8c8fb; height: 450px; margin-bottom: 5em">
 
-  <button mat-raised-button *ngIf="auth.isAuthenticated() && checkAuthor()" [routerLink]="['/question/edit',question.id]" color="primary" style="margin-top:1em"> Edit Question</button>
-  <button mat-raised-button *ngIf="auth.isAuthenticated() && checkAuthor()" [routerLink]="['/question/edit',question.id]" color="primary" style="margin-top:1em; margin-left: 1em"> Delete Question</button>
+  <button mat-raised-button *ngIf="(auth.isAuthenticated() && checkAuthor()) || auth.isAdmin()" [routerLink]="['/question/'+ this.auth?.getUser() + '/edit/'+ question?.id_qst]" color="primary" style="margin-top:1em"> Edit Question</button>
+  <button mat-raised-button *ngIf="(auth.isAuthenticated() && checkAuthor())|| auth.isAdmin()" [routerLink]="['/questions']" color="primary" style="margin-top:1em; margin-left: 1em" (click)="deleteButton()"> Delete Question</button>
 
 
   <h1 class="heading" style="font-style: italic;">{{question?.title}}</h1>
@@ -10,14 +10,15 @@
 
   <div class="textq"> {{question?.qst_text}}</div>
   <div >
-    <p class="p1">Creation date: {{question?.creation_date | date: 'short' }}</p>
+    <p class="p1">Creation date: {{question?.creation_date  }}</p>
     <p class="p1">Score: {{question?.score_qst}}</p>
 
-    <p class="p2">Author: {{question?.author?.username}}</p></div>
+    <p class="p2">Author: {{question?.author?.username}}</p>
+    <p class="p2">Score: {{question?.author?.score}}</p></div>
 
   <div style="margin-left: 1em; color:white">
     <mat-chip-list selectable="false">
-      <mat-chip style="background-color: white" *ngFor="let tag of question?.tags" [textContent]="tag.name"></mat-chip>
+      <mat-chip style="background-color: white" *ngFor="let tag of question?.listOfTags" [textContent]="tag.tag_name"></mat-chip>
     </mat-chip-list>
 
 
@@ -25,10 +26,10 @@
   </div>
 
 
-  <p class="p2"><button class="btn btn-primary"  [disabled]="!auth.isAuthenticated() || checkAuthor()" mat-fab color="white" id="like" (click)="handleClickMe()"> Like </button>
-    <button class="btn btn-primary"  [disabled]="!auth.isAuthenticated() || checkAuthor()" mat-fab color="white" style="margin-left: 0.5em; margin-right: 0.5em;" id="dislike" (click)="handleClickMe()"> Dislike </button>
+  <p class="p2"><button class="btn btn-primary"  [disabled]="!auth.isAuthenticated() || checkAuthor()  " mat-fab color="white" id="like" (click)="handleClickLike()"> Like </button>
+    <button class="btn btn-primary"  [disabled]="!auth.isAuthenticated() || checkAuthor()" mat-fab color="white" style="margin-left: 0.5em; margin-right: 0.5em;" id="dislike" (click)="handleClickDislike()"> Dislike </button>
 
-    <button mat-raised-button *ngIf="auth.isAuthenticated()" [routerLink]="['/question/answer',question.id]" color="primary" style="margin-top:1em"> Answer </button>
+    <button mat-raised-button *ngIf="auth.isAuthenticated()" [routerLink]="['/question/' + this.auth?.getUser() + '/answer',question?.id_qst]" color="primary" style="margin-top:1em"> Answer </button>
 <br>
 
   </p>
@@ -39,12 +40,12 @@
 </div>
 
 
-<app-answer-thumbnail *ngFor="let answer of question?.answers" [answer]="answer"  ></app-answer-thumbnail>
-
+<app-answer-thumbnail *ngFor="let answer of question?.listOfAnswers" [answer]="answer"  ></app-answer-thumbnail>
 
 
 
 </body>
+
 
 
 

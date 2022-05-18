@@ -10,14 +10,14 @@
   <div>
     <hr>
     <div class="col-md-4" >
-      <form autocomplete="off" novalidate [formGroup]="profileForm" (ngSubmit)="saveNewQst(profileForm.value)">
+      <form autocomplete="off" novalidate *ngIf="profileForm" [formGroup]="profileForm" (ngSubmit)="saveNewQst(profileForm.value)">
         <div class="form-group" style="margin-top: 2em" [ngClass]="{'error': !validateTitle()}" >
 
           <br>
-          <label for="questionTitle">Question Title:</label>
+          <label for="title">Question Title:</label>
 <br>
 
-          <input formControlName="questionTitle" id="questionTitle" type="text" class="form-control"
+          <input formControlName="title" id="title" type="text" class="form-control"
                  placeholder="Question Title..." style="margin-bottom: 2em; height: 100px; width: 400px"/>
           <em *ngIf="!validateTitle()" >Required</em>
 
@@ -26,17 +26,17 @@
 
         <br>
         <div class="form-group" style="margin-top: 1em" [ngClass]="{'error': !validateText()}">
-          <label for="questionText">Question Text:</label>
+          <label for="qst_text">Question Text:</label>
   <br>
-          <input formControlName="questionText" id="questionText" type="text" class="form-control"
+          <input formControlName="qst_text" id="qst_text" type="text" class="form-control"
                  placeholder="Text..." style="margin-bottom: 2em; height: 300px; width: 700px"/>
           <em *ngIf="!validateText()">Required</em>
         </div>
 
         <div class="form-group" style="margin-top: 1em" [ngClass]="{'error': !validateTags()}">
-          <label for="questionTags">Question Tags:</label>
+          <label for="listOfTags">Question Tags:</label>
           <br>
-          <input formControlName="questionTags" id="questionTags" type="text" class="form-control"
+          <input formControlName="listOfTags" id="listOfTags" type="text" class="form-control"
                  placeholder="Tags..." style="margin-bottom: 2em; height: 100px; width: 700px"/>
           <em *ngIf="!validateTags()">Required</em>
         </div>
@@ -45,7 +45,7 @@
 
         <div style="margin-top: 1em">
           <button mat-raised-button type="submit" class="btn btn-primary" [disabled]="profileForm.invalid" style="margin-left: 3em;">Save</button>
-          <button mat-raised-button type="buttton" class="btn btn-primary" style="margin-left: 2em;" (click)="cancel()">Cancel</button>
+          <button mat-raised-button type="buttton" class="btn btn-primary" style="margin-left: 2em;" (click)="cancel()"  >Cancel</button>
         </div>
       </form>
 

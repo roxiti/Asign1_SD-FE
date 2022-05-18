@@ -9,7 +9,7 @@ import {Router} from "@angular/router";
 })
 export class LoginComponent implements OnInit {
 
-  userName!:string
+  username!:string
   password!:string
   mouseoverLogin:any
 
@@ -23,7 +23,7 @@ export class LoginComponent implements OnInit {
   login(formValues:any )
   {
 
-    this.authService.loginUser(formValues.userName
+    this.authService.loginUser(formValues.username
     ,formValues.password)
 
     this.route.navigate(['home'])

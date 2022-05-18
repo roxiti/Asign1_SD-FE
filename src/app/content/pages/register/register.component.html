@@ -14,9 +14,9 @@
     <div class="col-md-4">
       <form autocomplete="off" #loginForm="ngForm" (ngSubmit)="register(loginForm.value)"  novalidate>
         <div class="form-group" style="margin-top: 4em">
-          <label for="userName">User Name:</label>
+          <label for="username">User Name:</label>
           <em style="color:red"; *ngIf="loginForm.controls.userName?.invalid && (loginForm.controls.userName?.touched || mouseoverLRegister )">Required</em>
-          <input (ngModel)="userName" required name="userName" id="userName" type="text" class="form-control" placeholder="User Name..." style="margin-left: 2em; margin-bottom: 2em"/>
+          <input (ngModel)="username" required name="username" id="username" type="text" class="form-control" placeholder="User Name..." style="margin-left: 2em; margin-bottom: 2em"/>
         </div>
         <div class="form-group" >
           <label for="password">Password:</label>
@@ -25,21 +25,27 @@
         </div>
 
         <div class="form-group" >
+          <label for="email">Email:</label>
+          <em  *ngIf="loginForm.controls.password?.invalid && (loginForm.controls.password?.touched || mouseoverLRegister)">Required</em>
+          <input id="email" type="email" (ngModel)="email" required name="email" class="form-control"placeholder="Email..." style="margin-left: 4em; margin-bottom: 2em"/>
+        </div>
+
+        <div class="form-group" >
           <label for="lastName">Last Name:</label>
           <em  *ngIf="loginForm.controls.password?.invalid && (loginForm.controls.password?.touched || mouseoverLRegister)">Required</em>
-          <input id="lastName" type="text" (ngModel)="lastName" required name="lastName" class="form-control"placeholder="Last Name..." style="margin-left: 2em; margin-bottom: 2em"/>
+          <input id="lastname" type="text" (ngModel)="lastname" required name="lastname" class="form-control"placeholder="Last Name..." style="margin-left: 2em; margin-bottom: 2em"/>
         </div>
 
         <div class="form-group" >
           <label for="firstName">First Name:</label>
           <em  *ngIf="loginForm.controls.password?.invalid && (loginForm.controls.password?.touched || mouseoverLRegister)">Required</em>
-          <input id="firstName" type="text" (ngModel)="firstName" required name="firstName" class="form-control"placeholder="First Name..." style="margin-left: 2em; margin-bottom: 2em"/>
+          <input id="firstname" type="text" (ngModel)="firstname" required name="firstname" class="form-control"placeholder="First Name..." style="margin-left: 2em; margin-bottom: 2em"/>
         </div>
 
 
 
         <span (mouseenter)="mouseoverLRegister=true" (mouseleave)="mouseoverLRegister=false"></span>
-        <button mat-raised-button type="submit" [disabled]="loginForm.invalid" class="btn btn-primary" color="primary">Login</button>
+        <button mat-raised-button type="submit" [disabled]="loginForm.invalid" class="btn btn-primary" color="primary">Register</button>
         <button mat-raised-button  type="button" (click) ="cancel()" class="btn btn-default" style="margin-left: 2em;"  color="primary">Cancel</button>
       </form>
     </div>

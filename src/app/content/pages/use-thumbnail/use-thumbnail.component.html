@@ -1,0 +1,32 @@
+<body>
+
+<!--<h1 class="heading" style="font-style: italic;">{{answer.}}</h1>-->
+<div *ngIf="isBanned()"style="background-color: #ff0000; display: block; height: 400px" >
+  <div class="texta"> {{user.username}}</div>
+  <p class="p1">First name: {{user.firstname}} </p>
+  <p class="p1">Last name: {{user.lastname}} </p>
+  <p class="p1">Email: {{user.email}} </p>
+  <p class="p1">Score: {{user.score}} </p>
+
+  <button mat-raised-button   color="white" style="margin-top:-3em" id="unban" (click)="unbanUser()"> Unban user </button>
+
+</div>
+  <div *ngIf="!isBanned()"style="background-color: #490166; display: block; height: 400px" >
+  <div class="texta"> {{user.username}}</div>
+  <p class="p1">First name: {{user.firstname}} </p>
+  <p class="p1">Last name: {{user.lastname}} </p>
+  <p class="p1">Email: {{user.email}} </p>
+  <p class="p1">Score: {{user.score}} </p>
+
+
+  <button mat-raised-button   color="white" style="margin-top:-3em" id="ban" (click)="banUser()"> Ban user </button>
+
+  <br>
+
+</div>
+
+
+
+
+
+</body>

@@ -12,16 +12,25 @@ export class ProfileComponent implements OnInit {
 
   constructor(private authService:AuthService, private router:Router) { }
 
-  private firstName!:FormControl
-  private lastName!:FormControl
+  private firstname!:FormControl
+  private lastname!:FormControl
+  private email!:FormControl
+  private password!:FormControl
   profileForm!    :FormGroup
 
   ngOnInit(): void {
-   this.firstName = new FormControl(this.authService.currentUser?.firstname, [Validators.required,Validators.pattern('[a-zA-Z].*')])
-    this.lastName = new FormControl(this.authService.currentUser?.lastname, [Validators.required,Validators.pattern('[a-zA-Z].*')])
+   this.firstname = new FormControl(this.authService.getFirstname(), [Validators.required,Validators.pattern('[a-zA-Z].*')])
+    this.lastname = new FormControl(this.authService.getLastname(), [Validators.required,Validators.pattern('[a-zA-Z].*')])
+    this.email = new FormControl(this.authService.getEmail(), [Validators.required,Validators.pattern('[a-zA-Z].*')])
+    this.password = new FormControl(this.authService.getPass())
+
+    console.log(this.password)
     this.profileForm = new FormGroup({
-      firstName: this.firstName,
-      lastName: this.lastName
+      firstname: this.firstname,
+      lastname: this.lastname,
+      email: this.email,
+      password:this.password,
+
     })
   }
     cancel()
@@ -31,19 +40,26 @@ export class ProfileComponent implements OnInit {
 
     saveProfile(formValues:any){
     if(this.profileForm.valid){
-      this.authService.updateCurrentUser(formValues.firstName,formValues.lastName)
+
+      console.log(this.profileForm)
+      this.authService.updateCurrentUser(formValues,this.authService.getUser())
       this.router.navigate([''])
     }
     }
 
     validateLastName()
     {
-      return this.lastName.valid || this.lastName.untouched
+      return this.lastname.valid || this.lastname.untouched
     }
+
+  validateEmail()
+  {
+    return this.email.valid || this.email.untouched
+  }
 
   validateFirstName()
   {
-    return this.firstName.valid || this.firstName.untouched
+    return this.firstname.valid || this.firstname.untouched
   }
 
 

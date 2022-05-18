@@ -12,32 +12,47 @@ import {IQuestion} from "../../models/question.model";
 })
 export class EditQuestionComponent implements OnInit {
 
-  private questionTitle!: FormControl
-  private questionText!: FormControl
-  private questionTags!: FormControl
-  private question!: IQuestion
+  private title!: FormControl
+  private qst_text!: FormControl
+  private listOfTags!: FormControl
+  private question: any
   profileForm!: FormGroup
 
-  constructor(private questionService: QuestionService, private router: ActivatedRoute, private route:Router) {
+  constructor(private questionService: QuestionService, private router: ActivatedRoute, private auth: AuthService, private route:Router) {
   }
 
   ngOnInit(): void {
-    this.question = this.questionService.getOneQuestion(+this.router.snapshot.params['id'])
-    this.questionTitle = new FormControl(this.questionService.getOneQuestion(this.question.id).title,Validators.required)
-    this.questionText = new FormControl(this.questionService.getOneQuestion(this.question.id).qst_text,Validators.required)
-    this.questionTags = new FormControl(this.questionService.getlistTags(this.question.id),Validators.required)
-    this.profileForm = new FormGroup({
-      questionTitle: this.questionTitle,
-      questionText: this.questionText,
-      questionTags: this.questionTags
-    })
+   this.questionService.getOneQuestion2(+this.router.snapshot.params['id']).then(res => {this.question = res;
+    this.title = new FormControl(this.question.title,Validators.required);
+    this.qst_text = new FormControl(this.question.qst_text,Validators.required);
+    let listS = []
+     for( let x of this.question.listOfTags)
+     {
+       listS.push(x.tag_name)
+     }
+    this.listOfTags = new FormControl(listS,Validators.required);
+   //  console.log(this.question.title);
+
+     this.profileForm = new FormGroup({
+       title: this.title,
+       qst_text: this.qst_text,
+       listOfTags: this.listOfTags
+     });
+   }
+
+
+
+   )
+
+
+
   }
 
 
   saveNewQst(formValues: any) {
     if (this.profileForm.valid) {
-      console.log(formValues.questionTags)
-      this.questionService.updateCurrentQuestion(formValues.questionTitle, formValues.questionText, formValues.questionTags, this.question.id)
+      console.log(formValues)
+      this.questionService.updateCurrentQuestion(formValues,this.auth.getUser() ,this.question?.id_qst)
       this.route.navigate(['questions'])
     }
 
@@ -46,19 +61,19 @@ export class EditQuestionComponent implements OnInit {
   validateTitle()
   {
 
-      return this.questionTitle.valid || this.questionTitle.untouched
+      return this.title.valid || this.title.untouched
 
   }
   validateText()
   {
 
-    return this.questionText.valid || this.questionText.untouched
+    return this.qst_text.valid || this.qst_text.untouched
 
   }
   validateTags()
   {
 
-    return this.questionTags.valid || this.questionTags.untouched
+    return this.listOfTags.valid || this.listOfTags.untouched
 
   }
 

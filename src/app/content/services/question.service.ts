@@ -4,332 +4,245 @@ import {IQuestion} from "../models/question.model";
 import {ITags} from "../models/tags.model";
 import {IUser} from "../models/user.model";
 import {IAnswer} from "../models/answer.model";
+import {HttpClient, HttpParams} from "@angular/common/http";
+import {combineAll} from "rxjs/operators";
+import {conditionallyCreateMapObjectLiteral} from "@angular/compiler/src/render3/view/util";
+import {getSortHeaderNotContainedWithinSortError} from "@angular/material/sort/sort-errors";
 
 @Injectable()
 export class QuestionService {
-  getQuestions():IQuestion[]
-  {
 
-
-    return QUESTIONS
-  }
-  getQuestionsOfUser(user: string):IQuestion[]
-  {
-
-
-    return QUESTIONS.filter(quest => quest.author.username == user )
+  constructor(private http: HttpClient) {
   }
 
-  getTAGS():ITags[]
+  async getQuestions2(): Promise<any>
   {
-    return TAGS
+    let question = await this.http.get("http://localhost:8080/questions/getQuestions").toPromise();
+
+    return question;
   }
+
+  async getOneQuestion2(id:number): Promise <any>
+  {
+    let queryParams = new HttpParams();
+    let question = await this.http.get("http://localhost:8080/questions/getOneQuestion?id="+id).toPromise();
+
+    return question
+  }
+
+  async createQuestion2(input:any, tags:any, user: any): Promise<any>
+  {
+    let queryParams = new HttpParams();
+
+    queryParams = queryParams.append("user",user);
+
+    console.log(queryParams);
+
+    let question = await  this.http.post("localhost:8080/questions/createQuestion",input).toPromise();
+
+    return question
+  }
+
+
+
+  async getQuestionsOfUser(user: any):Promise<any>
+  {
+
+    if(user=="admin")
+    {
+      let question = await this.http.get("http://localhost:8080/questions/getQuestions").toPromise();
+
+      return question
+    }
+    else { let question = await this.http.get("http://localhost:8080/questions/getQuestions").toPromise();
+
+      // @ts-ignore
+      return question.filter(quest => quest.author.username == user )
+    }
+
+
+
+   // console.log(user)
+
+
+
+
+
+  }
+
+  async deleteQuestion( id:any):Promise<any>
+  {
+
+    let questions = await this.http.delete("http://localhost:8080/questions/deleteOneQuestion?id="+id).toPromise();
+
+    return questions
+
+  }
+
+  async deleteAnswer(id:any):Promise<any>
+  {
+    let answer = await this.http.delete("http://localhost:8080/answers/deleteOneAnswer?id="+id).toPromise();
+
+
+    return answer
+  }
+
 
   getlistTags(id:number) {
 
 
-
-    const listT = this.getOneQuestion(id).tags
-    let list=[]
-    let listS=new String("")
-
-    let cnt = listT?.length
-    // @ts-ignore
-    for (let x of listT) {
-
-     listS += x.name
-
-      // @ts-ignore
-      if(cnt > 1)
-      listS += ','
-
-      // @ts-ignore
-      cnt--;
-
-     // list.push(x.name)
+    let qst
+    let listT
+    let listS: any[]=[]
 
 
+     this.getOneQuestion2(id).then(res => {qst = res;
 
-    }
+     listT = qst.listOfTags;
+       let list=[];
 
-    return listS
+       // @ts-ignore
+       for (let x of listT) {
 
-   // console.log(list)
-    console.log(listS)
-  }
-
-  getOneQuestion(id:number):IQuestion
-  {
-      return <IQuestion>QUESTIONS.find(question => question.id == id)
-  }
-
-
-  // getOneAnswer(id:number, ida:number, user:any)
-  // {
-  //   for(let x of QUESTIONS)
-  //   {
-  //     for(let y of x.answers)
-  //     {
-  //         if(y.author == user.username)
-  //         {
-  //           return y
-  //         }
-  //     }
-  //   }
-  // }
-
-  parseTags(message:any)
-  {
-
-    const array = message.split(',')
-
-    for( let x in TAGS)
-    {
-      TAGS.pop()
-    }
-      TAGS.pop()
-
-    for ( let x in array)
-    {
-      if(array[x])
-      TAGS.push(
-        {
-          name:array[x]
-        }
-      )
-    }
-
-    return TAGS
-
-  }
-
-  parseTagsString(message:any)
-  {
+         listS.push(x.tag_name);
 
 
 
 
-    for ( let x in message)
-    {
-      TAGS.push(
-        {
-          name:x
-        }
-      )
-    }
 
-    return TAGS
-
-  }
-
-  createQuestion(input:any, user: any)
-  {
-
-    QUESTIONS.push({
-      id:7,
-      title:input.title,
-      qst_text:input.qst_text,
-      creation_date:new Date(),
-      score_qst:0,
-      author: {
-        username: user.username,
-        password: user.password,
-        firstname: user.firstname,
-        lastname: user.lastname,
-        score:34
-
-      },
-      tags: this.parseTags(input.tags),
-      answers:[]
-
-
-    })
-
-    console.log(QUESTIONS)
-    return QUESTIONS;
-
-  }
-
-  createAnswer(input:any,user:any,id:number)
-  {
-
-    this.getOneQuestion(id).answers?.push(
-      {
-        id:3,
-        ans_text: input.ans_text,
-        creation_date: new Date(),
-        score_ans: 0,
-        author: {
-          username: user.username,
-          password: user.password,
-          firstname: user.firstname,
-          lastname: user.lastname,
-          score: 2
-        }
-      }
-
-    )
-
-    console.log(this.getOneQuestion(id).answers)
-
-    return this.getOneQuestion(id).answers
-
-
-  }
-
-  updateCurrentQuestion(title:string,text:string,tags:string, id:number)
-  {
-
-    // @ts-ignore
-    this.getOneQuestion(id)?.title = title
-    // @ts-ignore
-    this.getOneQuestion(id)?.qst_text = text
-
-    // @ts-ignore
-    this.getOneQuestion(id)?.tags = this.parseTags(tags)
-
-    console.log(this.getOneQuestion(id))
-  }
-
-  updateCurrentAnswer(text:string, id:number, ida:number)
-  {
-
-
-
-    // @ts-ignore
-    this.getOneQuestion(id)?.answers = text
-
-
-    console.log(this.getOneQuestion(id))
-  }
-
-
-  searchAnswers(user:any)
-  {
-    let listA =[]
-
-    for(let x of QUESTIONS)
-    {
-
-       for(let  a of x.answers)
-       {
-          if(a.author.username == user)
-          {
-            // @ts-ignore
-            listA.push(a)
-          }
        }
+
+      console.log(listS)
+       return listS
+     })
+
+
+
+  }
+
+  async createQuestion(input:any, user: any):Promise<any>
+  {
+
+
+    let question = await this.http.post("http://localhost:8080/questions/createQuestion"+"?tags="+ input.tags+"&user="+user,input).toPromise();
+
+
+
+
+    return question
+
+
+  }
+
+  async createAnswer(input:any,user:any,id:number):Promise<any>
+  {
+
+
+    let answer = await this.http.post("http://localhost:8080/answers/createAnswer"+"?user="+ user +"&id_qst="+id,input).toPromise();
+
+
+
+    return answer
+
+
+  }
+
+  async updateCurrentQuestion(input:any,user:any,id:number)
+  {
+
+
+    let question = await this.http.post("http://localhost:8080/questions/updateOneQuestion?tags="+ input.listOfTags+"&user="+ user +"&id_qst="+id,{title: input.title, qst_text: input.qst_text}).toPromise();
+
+
+
+    return question
+
+
+  }
+
+  async likeButtonQuestion( user:any, id:number)
+  {
+
+
+
+    let questionUp = await this.http.get("http://localhost:8080/voteQuestion/voteUp?id=" + id + "&user=" + user).toPromise();
+
+
+
+    return questionUp
+  }
+
+  async dislikeButtonQuestion(user:any, id:number)
+  {
+    let questionDown = await this.http.get("http://localhost:8080/voteQuestion/voteDown?id="+id+"&user="+ user).toPromise();
+
+    return questionDown
+
+  }
+
+  async likeButtonAnswer(user:any, id:number)
+  {
+    let answerUp = await this.http.get("http://localhost:8080/voteAnswer/voteUp?id="+id+"&user="+ user).toPromise();
+
+   // console.log(answerUp)
+
+    return answerUp
+
+  }
+
+  async dislikeButtonAnswer(user:any, id:number)
+  {
+    let answerDown = await this.http.get("http://localhost:8080/voteAnswer/voteDown?id="+id+"&user="+ user).toPromise();
+
+    return answerDown
+
+  }
+
+  async getAnswersOfUser(user: any):Promise<any> {
+    let answers = await this.http.get("http://localhost:8080/answers/getAnswers").toPromise();
+    if(user=="admin") {
+      return answers
+
+
+    }
+    else {
+
+      // @ts-ignore
+      return answers.filter(answ => answ.author.username == user)
     }
 
-    // @ts-ignore
-    return listA
 
-    console.log(listA)
+
+  }
+
+  async getOneAnswer(id:any):Promise<any>
+  {
+    let answer = await this.http.get("http://localhost:8080/answers/getOneAnswer?id="+id).toPromise();
+
+    return answer
+
+  }
+
+
+  async updateCurrentAnswer(input:any,id:number):Promise<any>
+  {
+
+    let answer = await this.http.post("http://localhost:8080/answers/editOneAnswer?id="+id,input).toPromise();
+
+    return answer
+
+
   }
 
 
 
+
+
+
+
 }
 
 
 
 
-const TAGS:ITags[]=[
 
-
-
-
-]
-
-
-const QUESTIONS:IQuestion[] = [
-    {
-      id:1,
-      title:'How to work with Spring?',
-      qst_text:'I have difficulties understanding working with Spring. Some good resources ?',
-      creation_date:new Date('01/01/2022 09:23:11'),
-      score_qst:1,
-      author: {
-        username: 'maria',
-        password: 'parola12',
-        firstname:'Maria',
-        lastname:'Ioana',
-        score:34
-      },
-      tags: [
-        {
-         name: "Java"
-        },
-        {
-          name: "programming"
-        }
-      ],
-      answers:[
-        { id:1,
-          ans_text: "Binitelsssss",
-          creation_date: new Date('03/16/2022 13:42:11'),
-          score_ans: 0,
-          author: {
-            username: "marius",
-            password: '1234',
-            firstname: "Marius",
-            lastname: "Macean",
-            score: 2
-          }
-        },
-        { id:2,
-          ans_text: "Hello",
-          creation_date: new Date('03/16/2022 13:42:11'),
-          score_ans: 0,
-          author: {
-            username: "marius",
-            password: '1234',
-            firstname: "Marius",
-            lastname: "Macean",
-            score: 2}
-        }
-      ]
-
-
-
-
-    },
-    {
-      id:2,
-      title:'Want to learn Java',
-      qst_text:'Some good resources ?',
-      creation_date:new Date('2022-11-23 20:30:12'),
-      score_qst:0,
-      author: {
-        username: 'ana23',
-        password: 'ana',
-        firstname:'Ana',
-        lastname:'Pop',
-        score:23
-      },
-      tags: [
-        {
-          name: "Python nou"
-        },
-        {
-          name: "coding"
-        }
-      ],
-      answers:[
-        { id:1,
-        ans_text: "Hello",
-        creation_date: new Date('03/16/2022 13:42:11'),
-        score_ans: 0,
-        author: {
-          username: 'maria',
-          password: 'parola12',
-          firstname:'Maria',
-          lastname:'Ioana',
-          score:34
-        }
-}
-      ]
-
-    }
-
-]

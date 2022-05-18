@@ -1,0 +1,43 @@
+
+
+<div style="height:calc(400vh - 90px); display: flex; background-image: url('acs.jpg')">
+
+
+
+
+  <div>
+    <p style="visibility: hidden"> Hello </p>
+
+    <button mat-raised-button [routerLink]="['profile']" color="white" style="margin-right: 0.5em; margin-left: 0.5em"> Edit Profile</button>
+  </div>
+  <mat-card class="example-card" style="width: 400px; flex: 0.2 0.2 auto; height:auto; margin-top: 2em">
+
+
+     <!-- <button mat-raised-button [routerLink]="['question/create']" color="primary" style="margin-top:1em"> Create Question</button> -->
+      <br>
+    <h1>Users</h1>
+    <app-use-thumbnail *ngFor="let user of users" [user]="user"></app-use-thumbnail>
+
+
+  </mat-card>
+
+  <mat-card class="example-card" style="width: auto; margin-left: 4em; margin-right: 2em; flex: 1 1 auto; height: auto; margin-top: 2em">
+    <div>
+      <h1>My Questions</h1>
+      <app-question-thumbnail *ngFor="let question of questions" [question]="question"></app-question-thumbnail>
+    </div>
+
+
+
+  </mat-card>
+
+  <mat-card class="example-card" style="width: 500px; margin-left: 2em; margin-right: 3em; flex: 1 1 auto; height: auto; margin-top: 2em">
+
+    <div>
+      <h1>My Answers</h1>
+      <app-answer-thumbnail *ngFor="let answer of answers" [answer]="answer" ></app-answer-thumbnail>
+    </div>
+
+  </mat-card>
+
+</div>

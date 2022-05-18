@@ -5,19 +5,19 @@
 <div>
   <p style="visibility: hidden"> Hello </p>
 </div>
-<mat-card  style="text-align: center; margin-left: 20px; margin-right: 20px; margin-top: 20px; background-color:#fafafa;  ">
+<mat-card  style="text-align: center; margin-left: 20px; margin-right: 20px; margin-top: 20px; background-color:#fafafa; ">
   <mat-card-title >Edit Answer</mat-card-title>
   <div>
     <hr>
     <div class="col-md-4" >
-      <form autocomplete="off" novalidate [formGroup]="profileForm" >
-        <div class="form-group" style="margin-top: 2em" [ngClass]="{'error': !validateText()}" >
+      <form autocomplete="off" novalidate *ngIf="profileForm" [formGroup]="profileForm" (ngSubmit)="saveNewAnsw(profileForm.value)">
+        <div class="form-group" style="margin-top: 2em" [ngClass]="{ 'error': !validateText()}" >
 
           <br>
-          <label for="answerText">Answer Text:</label>
+          <label for="ans_text">Answer Text:</label>
           <br>
 
-          <input formControlName="answerText" id="answerText" type="text" class="form-control"
+          <input formControlName="ans_text" id="ans_text" type="text" class="form-control"
                  placeholder="Answer text..." style="margin-bottom: 2em; height: 100px; width: 400px"/>
           <em *ngIf="!validateText()" >Required</em>
 
@@ -28,7 +28,7 @@
 
         <div style="margin-top: 1em">
           <button mat-raised-button type="submit" class="btn btn-primary" [disabled]="profileForm.invalid" style="margin-left: 3em;">Save</button>
-          <button mat-raised-button type="buttton" class="btn btn-primary" style="margin-left: 2em;" (click)="cancel()">Cancel</button>
+          <button mat-raised-button type="buttton" class="btn btn-primary" style="margin-left: 2em;" [routerLink]="['/questions']">Cancel</button>
         </div>
       </form>
 

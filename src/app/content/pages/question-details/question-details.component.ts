@@ -14,27 +14,50 @@ import {ITags} from "../../models/tags.model";
 })
 export class QuestionDetailsComponent implements OnInit {
 
-  question!: IQuestion
+  question: any
+  once: number = 0
 
   constructor(private questionService:QuestionService, private route: ActivatedRoute,public auth:AuthService) { }
 
   ngOnInit(): void {
-    this.question = this.questionService.getOneQuestion(+this.route.snapshot.params['id'])
+   // this.question = this.questionService.getOneQuestion(+this.route.snapshot.params['id'])
+
+    this.questionService.getOneQuestion2(+this.route.snapshot.params['id']).then(res => this.question = res);
 
 
-
-    console.log(this.question.answers);
+   // console.log(this.question.answers);
   }
 
-  handleClickMe(){
-    // @ts-ignore
-    this.eventClick.emit((this.question?.score_qst ) + 1)
+  handleClickLike(){
+
+   // console.log(this.auth.currentUser)
+  //  console.log(+this.route.snapshot.params['id'])
+   this.questionService.likeButtonQuestion(this.auth.getUser(),+this.route.snapshot.params['id']).then(res => this.question = res);
+
+
+
   }
+
+  handleClickDislike(){
+
+    this.questionService.dislikeButtonQuestion(this.auth.getUser(),+this.route.snapshot.params['id']).then(res => this.question = res);
+
+
+  }
+
+  deleteButton()
+  {
+    this.questionService.deleteQuestion(+this.route.snapshot.params['id'])
+  }
+
 
   checkAuthor()
   {
-    return this.question.author.username == this.auth?.currentUser?.username
+
+    //return true;
+    return this.question?.author?.username == this.auth.getUser()
   }
+
 
 
 }
