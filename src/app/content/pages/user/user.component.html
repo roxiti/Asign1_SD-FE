@@ -22,7 +22,7 @@
       <mat-card-title>{{auth?.getLastname()}} {{auth?.getFirstname()}}</mat-card-title>
       <mat-card-subtitle>{{auth?.getUser()}}</mat-card-subtitle>
     </mat-card-header>
-    <h3>Score: </h3>
+    <h3>Score: {{auth?.getScore()}}</h3>
     <mat-card-actions>
       <button mat-raised-button [routerLink]="['profile']" color="primary"> Edit Profile</button>
 

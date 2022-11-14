@@ -41,7 +41,10 @@ import {HttpClient} from "@angular/common/http";
   {
     return localStorage.getItem('pass')
   }
-
+  getScore()
+  {
+   return this.currentUser.score;
+  }
 
   async loginUser(username: string, password:string) {
 
@@ -73,6 +76,7 @@ import {HttpClient} from "@angular/common/http";
       localStorage.setItem('firstname', this.currentUser.firstname)
       localStorage.setItem('lastname', this.currentUser.lastname)
       localStorage.setItem('email', this.currentUser.email)
+      localStorage.setItem('score', this.currentUser.score)
 
       console.log("intra aici")
 
@@ -174,6 +178,8 @@ import {HttpClient} from "@angular/common/http";
       localStorage.setItem('pass',USER.password)
       //@ts-ignore
       localStorage.setItem('email',USER.email)
+
+
 
 
     }

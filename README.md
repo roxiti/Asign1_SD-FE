@@ -25,3 +25,59 @@ Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To u
 ## Further help
 
 To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+
+
+# About the project 
+The implementation of the backend part of the project is composed of the basic CRUD operation performed on a database that contains the questions, answers, users and votes. The Backend is found on a private repository, people who are interested could send me a message and I will gladly share it with them.
+
+
+## Languages and Frameworks used: 
+ ### Backend: 
+ * Java Spring Boot
+ * MySQL Database
+ ### Frontend
+ * Angular
+ 
+
+
+A few screenshots from the application
+
+Landing page
+
+![Landing Page](./landingpage.png)
+
+Login page
+
+![Login Page](./login_page.png)
+
+Register page
+
+![Register Page](./register.png)
+
+Profile page
+
+![Profile Page](./profile_page.png)
+
+
+Question list
+
+![Landing Page](./stackoverflow_list_question.png)
+
+
+Ask a question 
+
+
+The user can ask a question, introducing helpful tags that could help when filtering questions
+
+![Question Page](./ask_a_question.png)
+
+
+My question 
+
+The user can edit or delete it's own question. The users can also like or dislike an answer, but they cannot like or dislike his own question, only offer an answer to it.
+
+![My question](./my_question.png)
+
+Edit question 
+
+![Edit question](./edit_question.png)
